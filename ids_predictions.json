@@ -1,0 +1,1402 @@
+[
+    {
+        "time": "14:28:46",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.78
+    },
+    {
+        "time": "14:28:48",
+        "source": "10.61.1.164",
+        "destination": "51.11.192.49",
+        "prediction": "Normal Traffic",
+        "confidence": 99.57
+    },
+    {
+        "time": "14:28:49",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.89
+    },
+    {
+        "time": "14:28:50",
+        "source": "10.61.1.164",
+        "destination": "20.189.173.26",
+        "prediction": "Normal Traffic",
+        "confidence": 99.56
+    },
+    {
+        "time": "14:28:50",
+        "source": "10.61.1.164",
+        "destination": "20.190.145.141",
+        "prediction": "Bots",
+        "confidence": 90.12
+    },
+    {
+        "time": "14:28:50",
+        "source": "10.61.1.164",
+        "destination": "20.190.145.141",
+        "prediction": "Bots",
+        "confidence": 89.75
+    },
+    {
+        "time": "14:28:50",
+        "source": "10.61.1.164",
+        "destination": "20.190.145.141",
+        "prediction": "Bots",
+        "confidence": 69.69
+    },
+    {
+        "time": "14:28:51",
+        "source": "10.61.1.164",
+        "destination": "20.190.145.141",
+        "prediction": "Normal Traffic",
+        "confidence": 99.89
+    },
+    {
+        "time": "14:28:51",
+        "source": "10.61.1.164",
+        "destination": "20.190.145.141",
+        "prediction": "Bots",
+        "confidence": 86.25
+    },
+    {
+        "time": "14:28:51",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.99
+    },
+    {
+        "time": "14:28:53",
+        "source": "10.61.1.164",
+        "destination": "20.189.173.26",
+        "prediction": "Bots",
+        "confidence": 97.43
+    },
+    {
+        "time": "14:28:53",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Bots",
+        "confidence": 58.86
+    },
+    {
+        "time": "14:28:53",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.99
+    },
+    {
+        "time": "14:28:56",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.99
+    },
+    {
+        "time": "14:28:58",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.87
+    },
+    {
+        "time": "14:29:00",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.98
+    },
+    {
+        "time": "14:29:02",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.8
+    },
+    {
+        "time": "14:29:04",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 77.04
+    },
+    {
+        "time": "14:29:05",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.85
+    },
+    {
+        "time": "14:29:07",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.88
+    },
+    {
+        "time": "14:29:09",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.87
+    },
+    {
+        "time": "14:29:11",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.87
+    },
+    {
+        "time": "14:29:14",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.82
+    },
+    {
+        "time": "14:29:15",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Bots",
+        "confidence": 59.98
+    },
+    {
+        "time": "14:29:16",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.75
+    },
+    {
+        "time": "14:29:18",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.83
+    },
+    {
+        "time": "14:29:21",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.87
+    },
+    {
+        "time": "14:29:23",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.87
+    },
+    {
+        "time": "14:29:25",
+        "source": "10.61.1.164",
+        "destination": "13.69.239.79",
+        "prediction": "Bots",
+        "confidence": 78.13
+    },
+    {
+        "time": "14:29:25",
+        "source": "10.61.1.164",
+        "destination": "13.69.239.79",
+        "prediction": "Bots",
+        "confidence": 96.98
+    },
+    {
+        "time": "14:29:25",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.86
+    },
+    {
+        "time": "14:29:26",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Bots",
+        "confidence": 54.53
+    },
+    {
+        "time": "14:29:27",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 98.99
+    },
+    {
+        "time": "14:29:29",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.8
+    },
+    {
+        "time": "14:29:31",
+        "source": "151.101.38.172",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.99
+    },
+    {
+        "time": "14:29:38",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 58.36
+    },
+    {
+        "time": "14:29:39",
+        "source": "10.61.1.164",
+        "destination": "20.189.173.26",
+        "prediction": "Bots",
+        "confidence": 99.07
+    },
+    {
+        "time": "14:29:40",
+        "source": "20.44.10.122",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 94.92
+    },
+    {
+        "time": "14:29:43",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 89.95
+    },
+    {
+        "time": "14:29:49",
+        "source": "10.61.1.164",
+        "destination": "104.208.16.92",
+        "prediction": "Normal Traffic",
+        "confidence": 99.88
+    },
+    {
+        "time": "14:29:50",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 62.94
+    },
+    {
+        "time": "14:30:02",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 64.6
+    },
+    {
+        "time": "14:30:16",
+        "source": "52.1.253.204",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.68
+    },
+    {
+        "time": "14:30:17",
+        "source": "10.61.1.164",
+        "destination": "52.1.253.204",
+        "prediction": "Normal Traffic",
+        "confidence": 99.7
+    },
+    {
+        "time": "14:30:21",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 88.58
+    },
+    {
+        "time": "14:30:43",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 89.95
+    },
+    {
+        "time": "14:31:03",
+        "source": "10.61.1.164",
+        "destination": "52.1.253.204",
+        "prediction": "Normal Traffic",
+        "confidence": 99.31
+    },
+    {
+        "time": "14:31:04",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 62.39
+    },
+    {
+        "time": "14:31:15",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 62.65
+    },
+    {
+        "time": "14:31:28",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 95.74
+    },
+    {
+        "time": "14:31:28",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 82.71
+    },
+    {
+        "time": "14:31:36",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 58.01
+    },
+    {
+        "time": "14:32:13",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 95.76
+    },
+    {
+        "time": "14:32:13",
+        "source": "52.1.253.204",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 96.49
+    },
+    {
+        "time": "14:32:18",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 57.44
+    },
+    {
+        "time": "14:32:30",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 58.35
+    },
+    {
+        "time": "14:32:40",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 53.12
+    },
+    {
+        "time": "14:32:43",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 95.29
+    },
+    {
+        "time": "14:33:12",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 89.97
+    },
+    {
+        "time": "14:33:33",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 53.35
+    },
+    {
+        "time": "14:33:44",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 60.92
+    },
+    {
+        "time": "14:33:58",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 98.04
+    },
+    {
+        "time": "14:33:59",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 95.26
+    },
+    {
+        "time": "14:34:02",
+        "source": "13.89.179.11",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.4
+    },
+    {
+        "time": "14:34:04",
+        "source": "13.89.179.11",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 73.94
+    },
+    {
+        "time": "14:34:04",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Bots",
+        "confidence": 58.84
+    },
+    {
+        "time": "14:34:05",
+        "source": "13.89.179.11",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 90.86
+    },
+    {
+        "time": "14:34:15",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 64.25
+    },
+    {
+        "time": "14:34:25",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 56.12
+    },
+    {
+        "time": "14:34:36",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 60.27
+    },
+    {
+        "time": "14:34:49",
+        "source": "10.61.1.164",
+        "destination": "13.89.179.11",
+        "prediction": "DDoS",
+        "confidence": 88.71
+    },
+    {
+        "time": "14:34:57",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 58.04
+    },
+    {
+        "time": "14:34:59",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 89.92
+    },
+    {
+        "time": "14:35:13",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 95.26
+    },
+    {
+        "time": "14:35:18",
+        "source": "52.1.253.204",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 95.22
+    },
+    {
+        "time": "14:35:18",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Bots",
+        "confidence": 54.59
+    },
+    {
+        "time": "14:35:29",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 71.87
+    },
+    {
+        "time": "14:35:39",
+        "source": "10.61.1.164",
+        "destination": "13.107.137.11",
+        "prediction": "Normal Traffic",
+        "confidence": 99.86
+    },
+    {
+        "time": "14:35:49",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Bots",
+        "confidence": 83.29
+    },
+    {
+        "time": "14:35:58",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 91.67
+    },
+    {
+        "time": "14:36:01",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 60.51
+    },
+    {
+        "time": "14:36:28",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 95.31
+    },
+    {
+        "time": "14:36:44",
+        "source": "13.107.137.11",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.72
+    },
+    {
+        "time": "14:36:44",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 85.25
+    },
+    {
+        "time": "14:36:49",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 59.5
+    },
+    {
+        "time": "14:37:00",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 53.62
+    },
+    {
+        "time": "14:37:13",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 74.05
+    },
+    {
+        "time": "14:37:25",
+        "source": "52.167.249.196",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.81
+    },
+    {
+        "time": "14:37:28",
+        "source": "52.167.249.196",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.9
+    },
+    {
+        "time": "14:37:32",
+        "source": "52.167.249.196",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.58
+    },
+    {
+        "time": "14:37:32",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.78
+    },
+    {
+        "time": "14:37:33",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 60.92
+    },
+    {
+        "time": "14:37:35",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 93.29
+    },
+    {
+        "time": "14:37:36",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 53.07
+    },
+    {
+        "time": "14:37:36",
+        "source": "23.215.215.227",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.74
+    },
+    {
+        "time": "14:37:37",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.48
+    },
+    {
+        "time": "14:37:39",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 72.82
+    },
+    {
+        "time": "14:37:39",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 87.08
+    },
+    {
+        "time": "14:37:41",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 97.68
+    },
+    {
+        "time": "14:37:42",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 83.6
+    },
+    {
+        "time": "14:37:42",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 55.66
+    },
+    {
+        "time": "14:37:43",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 89.92
+    },
+    {
+        "time": "14:37:44",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.65
+    },
+    {
+        "time": "14:37:47",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.67
+    },
+    {
+        "time": "14:37:48",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 69.87
+    },
+    {
+        "time": "14:37:49",
+        "source": "23.215.215.227",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.1
+    },
+    {
+        "time": "14:37:50",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.63
+    },
+    {
+        "time": "14:37:52",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.44
+    },
+    {
+        "time": "14:38:24",
+        "source": "10.61.1.164",
+        "destination": "104.114.67.71",
+        "prediction": "Normal Traffic",
+        "confidence": 98.32
+    },
+    {
+        "time": "14:38:24",
+        "source": "48.192.143.121",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.78
+    },
+    {
+        "time": "14:38:25",
+        "source": "10.61.1.164",
+        "destination": "52.106.7.3",
+        "prediction": "Normal Traffic",
+        "confidence": 99.45
+    },
+    {
+        "time": "14:38:28",
+        "source": "13.89.179.11",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.86
+    },
+    {
+        "time": "14:38:31",
+        "source": "10.61.1.164",
+        "destination": "52.106.7.3",
+        "prediction": "Normal Traffic",
+        "confidence": 99.34
+    },
+    {
+        "time": "14:38:34",
+        "source": "13.89.179.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.44
+    },
+    {
+        "time": "14:38:36",
+        "source": "13.89.179.14",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 90.22
+    },
+    {
+        "time": "14:38:41",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 74.96
+    },
+    {
+        "time": "14:38:41",
+        "source": "40.126.17.131",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 69.56
+    },
+    {
+        "time": "14:38:47",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 99.89
+    },
+    {
+        "time": "14:38:49",
+        "source": "57.155.161.64",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 59.97
+    },
+    {
+        "time": "14:38:49",
+        "source": "10.61.1.164",
+        "destination": "57.155.161.95",
+        "prediction": "Normal Traffic",
+        "confidence": 99.95
+    },
+    {
+        "time": "14:38:57",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 64.33
+    },
+    {
+        "time": "14:39:08",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 62.71
+    },
+    {
+        "time": "14:39:10",
+        "source": "10.61.1.164",
+        "destination": "172.253.118.188",
+        "prediction": "Normal Traffic",
+        "confidence": 99.46
+    },
+    {
+        "time": "14:39:13",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 91.65
+    },
+    {
+        "time": "14:39:19",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 58.95
+    },
+    {
+        "time": "14:39:22",
+        "source": "10.61.1.164",
+        "destination": "40.79.173.41",
+        "prediction": "Bots",
+        "confidence": 90.4
+    },
+    {
+        "time": "14:39:50",
+        "source": "10.61.1.164",
+        "destination": "40.126.17.131",
+        "prediction": "Normal Traffic",
+        "confidence": 99.55
+    },
+    {
+        "time": "14:40:09",
+        "source": "13.89.179.9",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 93.39
+    },
+    {
+        "time": "14:40:11",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 50.21
+    },
+    {
+        "time": "14:40:13",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 85.26
+    },
+    {
+        "time": "14:40:22",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 54.89
+    },
+    {
+        "time": "14:40:30",
+        "source": "10.61.1.164",
+        "destination": "52.54.172.208",
+        "prediction": "Normal Traffic",
+        "confidence": 99.73
+    },
+    {
+        "time": "14:40:32",
+        "source": "52.54.172.208",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 94.3
+    },
+    {
+        "time": "14:40:43",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 59.62
+    },
+    {
+        "time": "14:40:54",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 53.71
+    },
+    {
+        "time": "14:40:54",
+        "source": "10.61.1.164",
+        "destination": "13.89.179.9",
+        "prediction": "Normal Traffic",
+        "confidence": 99.41
+    },
+    {
+        "time": "14:40:56",
+        "source": "10.61.1.164",
+        "destination": "52.168.117.170",
+        "prediction": "Normal Traffic",
+        "confidence": 67.21
+    },
+    {
+        "time": "14:41:00",
+        "source": "10.61.1.164",
+        "destination": "3.222.85.173",
+        "prediction": "Normal Traffic",
+        "confidence": 85.54
+    },
+    {
+        "time": "14:41:00",
+        "source": "10.61.1.164",
+        "destination": "3.222.85.173",
+        "prediction": "Normal Traffic",
+        "confidence": 92.81
+    },
+    {
+        "time": "14:41:05",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 52.67
+    },
+    {
+        "time": "14:41:12",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 89.57
+    },
+    {
+        "time": "14:41:28",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 80.7
+    },
+    {
+        "time": "14:41:34",
+        "source": "10.61.1.164",
+        "destination": "52.22.216.12",
+        "prediction": "Normal Traffic",
+        "confidence": 99.52
+    },
+    {
+        "time": "14:41:46",
+        "source": "104.114.67.71",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 71.33
+    },
+    {
+        "time": "14:41:49",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 63.61
+    },
+    {
+        "time": "14:41:55",
+        "source": "52.182.143.209",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 97.8
+    },
+    {
+        "time": "14:42:00",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 67.5
+    },
+    {
+        "time": "14:42:11",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 74.71
+    },
+    {
+        "time": "14:42:12",
+        "source": "10.61.1.164",
+        "destination": "104.114.67.71",
+        "prediction": "Normal Traffic",
+        "confidence": 96.78
+    },
+    {
+        "time": "14:42:13",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 95.76
+    },
+    {
+        "time": "14:42:13",
+        "source": "52.54.172.208",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 68.6
+    },
+    {
+        "time": "14:42:13",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 97.55
+    },
+    {
+        "time": "14:42:22",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 53.63
+    },
+    {
+        "time": "14:42:35",
+        "source": "52.22.216.12",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 97.75
+    },
+    {
+        "time": "14:42:43",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 50.2
+    },
+    {
+        "time": "14:42:44",
+        "source": "10.61.1.164",
+        "destination": "52.168.117.170",
+        "prediction": "Normal Traffic",
+        "confidence": 99.45
+    },
+    {
+        "time": "14:42:54",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 55.73
+    },
+    {
+        "time": "14:42:56",
+        "source": "172.253.118.188",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 95.17
+    },
+    {
+        "time": "14:43:05",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 64.61
+    },
+    {
+        "time": "14:43:12",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 76.59
+    },
+    {
+        "time": "14:43:13",
+        "source": "52.168.117.175",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 95.53
+    },
+    {
+        "time": "14:43:13",
+        "source": "52.168.117.175",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 81.76
+    },
+    {
+        "time": "14:43:13",
+        "source": "52.168.117.175",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 80.68
+    },
+    {
+        "time": "14:43:15",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 95.2
+    },
+    {
+        "time": "14:43:18",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 98.97
+    },
+    {
+        "time": "14:43:27",
+        "source": "10.61.1.164",
+        "destination": "20.50.73.12",
+        "prediction": "Normal Traffic",
+        "confidence": 99.73
+    },
+    {
+        "time": "14:43:30",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 51.63
+    },
+    {
+        "time": "14:43:30",
+        "source": "10.61.1.164",
+        "destination": "23.53.240.136",
+        "prediction": "Normal Traffic",
+        "confidence": 94.47
+    },
+    {
+        "time": "14:43:41",
+        "source": "10.61.1.164",
+        "destination": "52.168.117.175",
+        "prediction": "Normal Traffic",
+        "confidence": 95.97
+    },
+    {
+        "time": "14:43:41",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 59.69
+    },
+    {
+        "time": "14:43:52",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 60.68
+    },
+    {
+        "time": "14:43:52",
+        "source": "204.79.197.203",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.19
+    },
+    {
+        "time": "14:44:13",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 87.67
+    },
+    {
+        "time": "14:44:15",
+        "source": "52.168.117.175",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.53
+    },
+    {
+        "time": "14:44:17",
+        "source": "52.168.117.175",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 99.53
+    },
+    {
+        "time": "14:44:28",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 95.29
+    },
+    {
+        "time": "14:44:29",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 92.47
+    },
+    {
+        "time": "14:44:34",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Bots",
+        "confidence": 57.78
+    },
+    {
+        "time": "14:44:47",
+        "source": "10.61.1.164",
+        "destination": "3.222.85.173",
+        "prediction": "Normal Traffic",
+        "confidence": 95.12
+    },
+    {
+        "time": "14:44:55",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 50.11
+    },
+    {
+        "time": "14:44:57",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 61.27
+    },
+    {
+        "time": "14:45:08",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 60.33
+    },
+    {
+        "time": "14:45:28",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 89.92
+    },
+    {
+        "time": "14:45:44",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 95.29
+    },
+    {
+        "time": "14:45:49",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 68.07
+    },
+    {
+        "time": "14:45:51",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 62.11
+    },
+    {
+        "time": "14:46:02",
+        "source": "52.168.117.174",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 72.16
+    },
+    {
+        "time": "14:46:03",
+        "source": "10.61.1.164",
+        "destination": "52.168.117.174",
+        "prediction": "Normal Traffic",
+        "confidence": 95.45
+    },
+    {
+        "time": "14:46:03",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Bots",
+        "confidence": 51.86
+    },
+    {
+        "time": "14:46:06",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 56.0
+    },
+    {
+        "time": "14:46:13",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 85.3
+    },
+    {
+        "time": "14:46:19",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Bots",
+        "confidence": 52.68
+    },
+    {
+        "time": "14:46:24",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 53.29
+    },
+    {
+        "time": "14:46:35",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 67.37
+    },
+    {
+        "time": "14:46:45",
+        "source": "10.61.1.164",
+        "destination": "162.247.241.14",
+        "prediction": "Normal Traffic",
+        "confidence": 95.26
+    },
+    {
+        "time": "14:46:48",
+        "source": "10.61.1.164",
+        "destination": "52.168.117.174",
+        "prediction": "Normal Traffic",
+        "confidence": 99.47
+    },
+    {
+        "time": "14:46:49",
+        "source": "10.61.1.164",
+        "destination": "52.168.117.174",
+        "prediction": "Bots",
+        "confidence": 98.07
+    },
+    {
+        "time": "14:46:55",
+        "source": "52.182.143.210",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 93.43
+    },
+    {
+        "time": "14:47:06",
+        "source": "10.61.1.164",
+        "destination": "52.182.143.210",
+        "prediction": "Normal Traffic",
+        "confidence": 87.76
+    },
+    {
+        "time": "14:47:13",
+        "source": "162.247.241.14",
+        "destination": "10.61.1.164",
+        "prediction": "Normal Traffic",
+        "confidence": 89.92
+    }
+]

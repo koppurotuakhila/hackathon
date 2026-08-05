@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IDS Live Monitor</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #040810;
+    --panel: #070e1a;
+    --border: #0d2040;
+    --accent: #00e5ff;
+    --danger: #ff2d55;
+    --warn: #ff9f0a;
+    --safe: #30d158;
+    --muted: #3a5070;
+    --text: #c8ddf0;
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Exo 2', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,229,255,0.015) 2px, rgba(0,229,255,0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  .logo { display: flex; align-items: center; gap: 14px; }
+
+  .logo-icon {
+    width: 40px; height: 40px;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    box-shadow: 0 0 14px rgba(0,229,255,0.3);
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 14px rgba(0,229,255,0.3); }
+    50%       { box-shadow: 0 0 28px rgba(0,229,255,0.6); }
+  }
+
+  .logo-text { font-weight: 900; font-size: 18px; letter-spacing: 0.12em; color: #fff; }
+  .logo-sub  { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.2em; margin-top: 1px; }
+
+  .header-controls { display: flex; align-items: center; gap: 12px; }
+
+  .btn-back {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    background: transparent;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .btn-back:hover { border-color: var(--accent); color: var(--accent); }
+
+  .status-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    display: flex; align-items: center; gap: 6px;
+    transition: all 0.3s;
+  }
+  .status-pill.running { border-color: var(--safe); color: var(--safe); box-shadow: 0 0 10px rgba(48,209,88,0.2); }
+
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); transition: all 0.3s; }
+  .status-pill.running .status-dot { background: var(--safe); animation: blink 1.2s ease-in-out infinite; }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.2; }
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: 1px solid;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  .btn-start { border-color: var(--safe);   color: var(--safe);   background: rgba(48,209,88,0.07); }
+  .btn-start:hover:not(:disabled) { background: rgba(48,209,88,0.2); box-shadow: 0 0 14px rgba(48,209,88,0.25); }
+  .btn-stop  { border-color: var(--danger); color: var(--danger); background: rgba(255,45,85,0.07); }
+  .btn-stop:hover:not(:disabled)  { background: rgba(255,45,85,0.2); box-shadow: 0 0 14px rgba(255,45,85,0.25); }
+  .btn-clear { border-color: var(--muted);  color: var(--muted);  background: transparent; }
+  .btn-clear:hover:not(:disabled) { border-color: var(--warn); color: var(--warn); }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stat-card { background: var(--panel); padding: 18px 24px; display: flex; flex-direction: column; gap: 4px; }
+
+  .stat-label { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  .stat-value { font-size: 28px; font-weight: 900; line-height: 1; color: #fff; transition: color 0.3s; }
+  .stat-value.danger { color: var(--danger); text-shadow: 0 0 20px rgba(255,45,85,0.4); }
+  .stat-value.safe   { color: var(--safe); }
+
+  .stat-sub { font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 2px; }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    height: calc(100vh - 141px);
+  }
+
+  .feed-panel { border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+
+  .panel-header {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--panel);
+    flex-shrink: 0;
+  }
+
+  .panel-title { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; }
+
+  .filter-tabs { display: flex; gap: 6px; }
+
+  .tab {
+    font-family: var(--mono); font-size: 10px; padding: 4px 10px;
+    border-radius: 4px; border: 1px solid var(--border); color: var(--muted);
+    cursor: pointer; letter-spacing: 0.08em; transition: all 0.15s; background: transparent;
+  }
+  .tab.active, .tab:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,229,255,0.07); }
+  .tab.danger-tab.active  { border-color: var(--danger); color: var(--danger); background: rgba(255,45,85,0.07); }
+
+  /* KEY FIX: feed-scroll uses flex-direction column-reverse so new items
+     appear at top WITHOUT causing layout reflow / page shake */
+  .feed-scroll {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .feed-scroll::-webkit-scrollbar { width: 4px; }
+  .feed-scroll::-webkit-scrollbar-track { background: var(--bg); }
+  .feed-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .feed-header-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 140px 90px;
+    padding: 8px 24px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(7,14,26,0.98);
+    position: sticky; top: 0; z-index: 10;
+    flex-shrink: 0;
+  }
+
+  .col-head { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* rows-wrap is a reverse-flex container: appending = visually prepending, no layout jump */
+  #rows-wrap {
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 1;
+  }
+
+  .feed-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 140px 90px;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 24px;
+    align-items: center;
+    transition: background 0.15s;
+    /* animation only fades in, no translate — avoids shake */
+    animation: row-fade 0.25s ease-out;
+  }
+
+  @keyframes row-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .feed-row:hover { background: rgba(13,32,64,0.6); }
+  .feed-row.threat { background: rgba(255,45,85,0.04); border-left: 2px solid var(--danger); }
+  .feed-row.threat:hover { background: rgba(255,45,85,0.08); }
+
+  .cell-time { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .cell-ip   { font-family: var(--mono); font-size: 12px; color: var(--text); }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px; border-radius: 4px;
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.05em; border: 1px solid;
+  }
+  .badge.normal { border-color: rgba(48,209,88,0.4);  color: var(--safe);   background: rgba(48,209,88,0.07); }
+  .badge.threat { border-color: rgba(255,45,85,0.5);  color: var(--danger); background: rgba(255,45,85,0.1); }
+
+  .conf-bar { display: flex; align-items: center; gap: 6px; }
+  .conf-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .conf-fill  { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
+  .conf-label { font-family: var(--mono); font-size: 10px; color: var(--muted); min-width: 36px; text-align: right; }
+
+  .side-panel { display: flex; flex-direction: column; overflow: hidden; }
+
+  .alert-box {
+    flex-shrink: 0; margin: 16px; padding: 14px 16px; border-radius: 8px;
+    border: 1px solid rgba(255,45,85,0.3); background: rgba(255,45,85,0.06);
+    display: none; animation: flash-in 0.4s ease;
+  }
+  .alert-box.visible { display: block; }
+
+  @keyframes flash-in {
+    0%   { opacity: 0; transform: scale(0.97); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .alert-title {
+    font-family: var(--mono); font-size: 11px; color: var(--danger);
+    letter-spacing: 0.15em; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .alert-title::before { content: '⚠'; font-size: 13px; }
+
+  .alert-item {
+    font-family: var(--mono); font-size: 11px; color: var(--text);
+    padding: 5px 0; border-bottom: 1px solid rgba(255,45,85,0.15);
+    display: flex; justify-content: space-between;
+  }
+  .alert-item:last-child { border-bottom: none; }
+  .alert-ip { color: var(--danger); }
+
+  .breakdown { flex: 1; overflow-y: auto; padding: 0 16px 16px; }
+  .breakdown-item { margin-bottom: 12px; }
+
+  .breakdown-label {
+    display: flex; justify-content: space-between;
+    font-family: var(--mono); font-size: 11px; color: var(--text); margin-bottom: 5px;
+  }
+  .breakdown-count { color: var(--accent); font-weight: 700; }
+  .breakdown-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .breakdown-fill  { height: 100%; border-radius: 3px; transition: width 0.6s ease; }
+
+  .empty-state {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; color: var(--muted); font-family: var(--mono); font-size: 13px;
+    letter-spacing: 0.1em; padding: 60px 24px; text-align: center;
+  }
+  .empty-icon { font-size: 40px; opacity: 0.3; }
+
+  .conn-error {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: rgba(255,45,85,0.15); border: 1px solid rgba(255,45,85,0.4);
+    color: var(--danger); font-family: var(--mono); font-size: 12px;
+    padding: 10px 20px; border-radius: 6px; display: none; z-index: 200; letter-spacing: 0.08em;
+  }
+  .conn-error.visible { display: block; }
+
+  @media (max-width: 900px) {
+    .main-grid { grid-template-columns: 1fr; }
+    .side-panel { display: none; }
+    .stats-bar { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🛡</div>
+    <div>
+      <div class="logo-text">NEURAL IDS</div>
+      <div class="logo-sub">LSTM INTRUSION DETECTION SYSTEM</div>
+    </div>
+  </div>
+  <div class="header-controls">
+    <a href="index.html" class="btn-back">← HOME</a>
+    <div class="status-pill" id="statusPill">
+      <div class="status-dot"></div>
+      <span id="statusText">OFFLINE</span>
+    </div>
+    <button class="btn btn-start" id="btnStart" onclick="startIDS()">▶ START</button>
+    <button class="btn btn-stop"  id="btnStop"  onclick="stopIDS()" disabled>■ STOP</button>
+    <button class="btn btn-clear" id="btnClear" onclick="clearLog()">⌫ CLEAR</button>
+  </div>
+</header>
+
+<div class="stats-bar">
+  <div class="stat-card">
+    <div class="stat-label">Total Packets</div>
+    <div class="stat-value" id="totalCount">0</div>
+    <div class="stat-sub">analysed</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Threats Detected</div>
+    <div class="stat-value danger" id="threatCount">0</div>
+    <div class="stat-sub" id="threatPct">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Normal Traffic</div>
+    <div class="stat-value safe" id="normalCount">0</div>
+    <div class="stat-sub" id="normalPct">—</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-label">Avg Confidence</div>
+    <div class="stat-value" id="avgConf">—</div>
+    <div class="stat-sub">model certainty</div>
+  </div>
+</div>
+
+<div class="main-grid">
+  <div class="feed-panel">
+    <div class="panel-header">
+      <div class="panel-title">⬡ LIVE TRAFFIC FEED</div>
+      <div class="filter-tabs">
+        <button class="tab active"     onclick="setFilter('all',this)">ALL</button>
+        <button class="tab danger-tab" onclick="setFilter('threat',this)">THREATS</button>
+        <button class="tab"            onclick="setFilter('normal',this)">NORMAL</button>
+      </div>
+    </div>
+
+    <div class="feed-scroll" id="feedScroll">
+      <div class="feed-header-row">
+        <div class="col-head">TIME</div>
+        <div class="col-head">SOURCE</div>
+        <div class="col-head">DESTINATION</div>
+        <div class="col-head">PREDICTION</div>
+        <div class="col-head">CONFIDENCE</div>
+      </div>
+      <!-- column-reverse wrapper: appendChild here = visually appears at TOP, no page shake -->
+      <div id="rows-wrap">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">📡</div>
+          <div>WAITING FOR TRAFFIC DATA</div>
+          <div style="font-size:10px;opacity:0.5">Click ▶ START to begin live capture</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-panel">
+    <div class="panel-header">
+      <div class="panel-title">⚡ RECENT ALERTS</div>
+    </div>
+    <div class="alert-box" id="alertBox">
+      <div class="alert-title">THREAT ACTIVITY DETECTED</div>
+      <div id="alertList"></div>
+    </div>
+    <div style="padding:16px 16px 8px;">
+      <div class="panel-title" style="margin-bottom:12px;">THREAT BREAKDOWN</div>
+      <div class="breakdown" id="breakdown">
+        <div style="font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;padding:40px 0;">No data yet</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="conn-error" id="connError">⚠ CANNOT REACH SERVER — Is server.py running on port 5000?</div>
+<audio id="alertAudio" src="alert.mp3" preload="auto"></audio>
+
+<script>
+  const API = 'http://127.0.0.1:5000';
+
+  // ── Audio ──
+  const alertSound  = document.getElementById('alertAudio');
+  alertSound.volume = 0.7;
+  let lastAlertTime = 0;
+  let audioUnlocked = false;
+
+  function unlockAudio() {
+    if (audioUnlocked) return;
+    alertSound.play().then(() => { alertSound.pause(); alertSound.currentTime = 0; audioUnlocked = true; }).catch(()=>{});
+  }
+
+  function playAlert() {
+    if (!audioUnlocked) return;
+    const now = Date.now();
+    if (now - lastAlertTime < 3000) return;
+    lastAlertTime = now;
+    alertSound.currentTime = 0;
+    alertSound.play().catch(()=>{});
+  }
+
+  // ── State ──
+  let allData        = [];
+  let seenKeys       = new Set();
+  let currentFilter  = 'all';
+  let pollInterval   = null;
+  let statusInterval = null;
+  let isRunning      = false;   // tracks whether IDS is active
+
+  function rowKey(r) { return `${r.time}|${r.source}|${r.destination}|${r.prediction}`; }
+
+  // ── Button state helper ──
+  function setRunningUI(running) {
+    isRunning = running;
+    document.getElementById('btnStart').disabled = running;
+    document.getElementById('btnStop').disabled  = !running;
+    document.getElementById('statusPill').classList.toggle('running', running);
+    document.getElementById('statusText').textContent = running ? 'LIVE' : 'OFFLINE';
+  }
+
+  // ── START ──
+  async function startIDS() {
+    unlockAudio();
+    setRunningUI(true);
+    try {
+      await fetch(`${API}/clear`);
+      allData  = [];
+      seenKeys = new Set();
+      clearDisplay();
+      await fetch(`${API}/start`);
+      startPolling();
+    } catch(e) {
+      showConnError();
+      setRunningUI(false);
+    }
+  }
+
+  // ── STOP ──
+  async function stopIDS() {
+    stopPolling();
+    setRunningUI(false);
+    try {
+      await fetch(`${API}/stop`);
+    } catch(e) { showConnError(); }
+  }
+
+  // ── CLEAR ──
+  async function clearLog() {
+    try {
+      await fetch(`${API}/clear`);
+    } catch(e) {}
+    allData  = [];
+    seenKeys = new Set();
+    clearDisplay();
+  }
+
+  // ── Polling ──
+  function startPolling() {
+    stopPolling();
+    fetchData();
+    pollInterval   = setInterval(fetchData,   1000);
+    statusInterval = setInterval(syncStatus,  3000);
+  }
+
+  function stopPolling() {
+    clearInterval(pollInterval);
+    clearInterval(statusInterval);
+    pollInterval = statusInterval = null;
+  }
+
+  // ── Sync status from server (only updates dot, never touches polling) ──
+  async function syncStatus() {
+    try {
+      const data = await (await fetch(`${API}/status`)).json();
+      hideConnError();
+      // Only update the visual dot — don't start/stop polling here
+      document.getElementById('statusPill').classList.toggle('running', data.running);
+      document.getElementById('statusText').textContent = data.running ? 'LIVE' : 'OFFLINE';
+    } catch(e) { showConnError(); }
+  }
+
+  // ── Fetch & render only NEW predictions ──
+  async function fetchData() {
+    if (!isRunning) return;   // ← KEY FIX: if stopped, don't fetch
+    try {
+      const resp = await fetch(`${API}/predictions`);
+      const data = await resp.json();
+      hideConnError();
+
+      if (!Array.isArray(data) || data.length === 0) return;
+
+      const newEntries = data.filter(r => !seenKeys.has(rowKey(r)));
+      if (newEntries.length === 0) return;
+
+      newEntries.forEach(r => { seenKeys.add(rowKey(r)); allData.unshift(r); });
+
+      appendRows(newEntries);   // append = visually prepend due to column-reverse
+
+      if (newEntries.some(r => r.prediction !== 'Normal Traffic')) playAlert();
+
+      updateStats();
+      updateBreakdown();
+      updateAlerts();
+    } catch(e) { showConnError(); }
+  }
+
+  // ── Append rows to column-reverse container (appears at top, no shake) ──
+  function appendRows(entries) {
+    const wrap  = document.getElementById('rows-wrap');
+    const empty = document.getElementById('emptyState');
+    if (empty) empty.remove();
+
+    entries.forEach(row => {
+      const isThreat = row.prediction !== 'Normal Traffic';
+      if (currentFilter === 'threat' && !isThreat) return;
+      if (currentFilter === 'normal' &&  isThreat) return;
+
+      const confColor = row.confidence > 90 ? 'var(--safe)'
+                      : row.confidence > 70 ? 'var(--warn)' : 'var(--danger)';
+
+      const div = document.createElement('div');
+      div.className = `feed-row${isThreat ? ' threat' : ''}`;
+      div.innerHTML = `
+        <div class="cell-time">${row.time}</div>
+        <div class="cell-ip">${row.source}</div>
+        <div class="cell-ip">${row.destination}</div>
+        <div><span class="badge ${isThreat ? 'threat' : 'normal'}">${isThreat ? '⚠' : '✓'} ${row.prediction}</span></div>
+        <div class="conf-bar">
+          <div class="conf-track">
+            <div class="conf-fill" style="width:${row.confidence}%;background:${confColor}"></div>
+          </div>
+          <div class="conf-label">${row.confidence}%</div>
+        </div>`;
+
+      wrap.appendChild(div);   // appendChild to reverse-flex = appears at top
+    });
+  }
+
+  // ── Full re-render for filter changes ──
+  function reRenderFeed() {
+    const wrap = document.getElementById('rows-wrap');
+    wrap.innerHTML = '';
+
+    const filtered = currentFilter === 'all'    ? allData
+                   : currentFilter === 'threat' ? allData.filter(d => d.prediction !== 'Normal Traffic')
+                   : allData.filter(d => d.prediction === 'Normal Traffic');
+
+    if (filtered.length === 0) {
+      wrap.innerHTML = `<div class="empty-state" id="emptyState">
+        <div class="empty-icon">📡</div>
+        <div>${allData.length === 0 ? 'WAITING FOR TRAFFIC DATA' : 'NO ENTRIES MATCH FILTER'}</div>
+      </div>`;
+      return;
+    }
+
+    // In column-reverse, render in reverse order so newest appears at top
+    [...filtered].reverse().forEach(row => {
+      const isThreat  = row.prediction !== 'Normal Traffic';
+      const confColor = row.confidence > 90 ? 'var(--safe)'
+                      : row.confidence > 70 ? 'var(--warn)' : 'var(--danger)';
+      const div = document.createElement('div');
+      div.className = `feed-row${isThreat ? ' threat' : ''}`;
+      div.innerHTML = `
+        <div class="cell-time">${row.time}</div>
+        <div class="cell-ip">${row.source}</div>
+        <div class="cell-ip">${row.destination}</div>
+        <div><span class="badge ${isThreat ? 'threat' : 'normal'}">${isThreat ? '⚠' : '✓'} ${row.prediction}</span></div>
+        <div class="conf-bar">
+          <div class="conf-track">
+            <div class="conf-fill" style="width:${row.confidence}%;background:${confColor}"></div>
+          </div>
+          <div class="conf-label">${row.confidence}%</div>
+        </div>`;
+      wrap.appendChild(div);
+    });
+  }
+
+  // ── Clear display back to empty state ──
+  function clearDisplay() {
+    document.getElementById('rows-wrap').innerHTML = `
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">📡</div>
+        <div>WAITING FOR TRAFFIC DATA</div>
+        <div style="font-size:10px;opacity:0.5">Loading model... predictions appear in ~10 seconds</div>
+      </div>`;
+    updateStats();
+    updateBreakdown();
+    updateAlerts();
+  }
+
+  // ── Stats ──
+  function updateStats() {
+    const total   = allData.length;
+    const threats = allData.filter(d => d.prediction !== 'Normal Traffic').length;
+    const normal  = total - threats;
+    const avgConf = total > 0 ? (allData.reduce((s,d) => s + d.confidence, 0) / total).toFixed(1) : '—';
+    document.getElementById('totalCount').textContent  = total;
+    document.getElementById('threatCount').textContent = threats;
+    document.getElementById('normalCount').textContent = normal;
+    document.getElementById('avgConf').textContent     = total > 0 ? avgConf + '%' : '—';
+    document.getElementById('threatPct').textContent   = total > 0 ? ((threats/total)*100).toFixed(1) + '% of traffic' : '—';
+    document.getElementById('normalPct').textContent   = total > 0 ? ((normal/total)*100).toFixed(1)  + '% of traffic' : '—';
+  }
+
+  // ── Breakdown ──
+  function updateBreakdown() {
+    const counts = {};
+    allData.forEach(d => { counts[d.prediction] = (counts[d.prediction] || 0) + 1; });
+    const total  = allData.length || 1;
+    const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+    const colors = ['#ff2d55','#00e5ff','#ff9f0a','#30d158','#bf5af2','#ff6b35'];
+    document.getElementById('breakdown').innerHTML = sorted.length
+      ? sorted.map(([label, count], i) => {
+          const pct   = ((count / total) * 100).toFixed(1);
+          const color = label !== 'Normal Traffic' ? colors[i % colors.length] : 'var(--safe)';
+          return `<div class="breakdown-item">
+            <div class="breakdown-label"><span>${label}</span><span class="breakdown-count">${count}</span></div>
+            <div class="breakdown-track"><div class="breakdown-fill" style="width:${pct}%;background:${color}"></div></div>
+          </div>`;
+        }).join('')
+      : '<div style="font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;padding:40px 0;">No data yet</div>';
+  }
+
+  // ── Alerts ──
+  function updateAlerts() {
+    const threats = allData.filter(d => d.prediction !== 'Normal Traffic').slice(0, 5);
+    const box  = document.getElementById('alertBox');
+    const list = document.getElementById('alertList');
+    if (!box || !list) return;
+    if (threats.length === 0) { box.classList.remove('visible'); return; }
+    box.classList.add('visible');
+    list.innerHTML = threats.map(t => `
+      <div class="alert-item">
+        <span class="alert-ip">${t.source}</span>
+        <span style="color:var(--warn)">${t.prediction}</span>
+        <span style="color:var(--muted)">${t.confidence}%</span>
+      </div>`).join('');
+  }
+
+  function showConnError() { document.getElementById('connError').classList.add('visible'); }
+  function hideConnError() { document.getElementById('connError').classList.remove('visible'); }
+
+  function setFilter(f, el) {
+    currentFilter = f;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    reRenderFeed();
+  }
+
+  // ── On page load: only check status, do NOT load data ──
+  syncStatus();
+</script>
+</body>
+</html>
