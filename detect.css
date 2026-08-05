@@ -1,0 +1,134 @@
+body{
+
+background:#0f172a;
+color:white;
+font-family:Orbitron, sans-serif;
+margin:0;
+padding:0;
+
+}
+
+.container{
+
+padding:40px;
+
+}
+
+.title{
+
+font-size:40px;
+font-weight:600;
+margin-bottom:5px;
+
+}
+
+.subtitle{
+
+color:#94a3b8;
+margin-bottom:40px;
+
+}
+
+/* Buttons */
+
+.controls{
+
+margin-bottom:30px;
+
+}
+
+.btn{
+
+padding:12px 20px;
+border:none;
+border-radius:8px;
+margin-right:10px;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+
+}
+
+.start{
+background:#22c55e;
+color:white;
+}
+
+.stop{
+background:#ef4444;
+color:white;
+}
+
+.dashboard{
+background:#6366f1;
+color:white;
+}
+
+.btn:hover{
+
+transform:scale(1.05);
+
+}
+
+/* Layout */
+
+.live-section{
+
+display:flex;
+gap:30px;
+
+}
+
+/* Alerts */
+
+.alerts{
+
+flex:1;
+background:#1e293b;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 15px rgba(0,0,0,0.5);
+
+}
+
+.alert{
+
+background:#7f1d1d;
+padding:15px;
+margin-top:15px;
+border-radius:8px;
+border-left:5px solid red;
+
+animation:alertGlow 1.5s infinite alternate;
+
+}
+
+@keyframes alertGlow{
+
+from{box-shadow:0 0 5px red}
+to{box-shadow:0 0 20px red}
+
+}
+
+/* Terminal Feed */
+
+.terminal{
+
+flex:1;
+background:#020617;
+padding:20px;
+border-radius:10px;
+font-family:monospace;
+height:400px;
+overflow:auto;
+
+box-shadow:0 0 15px rgba(0,0,0,0.5);
+
+}
+
+.feed{
+
+color:#22c55e;
+margin-bottom:6px;
+
+}

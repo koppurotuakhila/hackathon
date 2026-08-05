@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IDS Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg:       #02040a;
+  --panel:    #060c18;
+  --border:   #0a1a30;
+  --accent:   #f5fbfc;
+  --danger:   #ff3060;
+  --warn:     #ffaa00;
+  --safe:     #00e676;
+  --purple:   #b040ff;
+  --muted:    #f9fafb;
+  --text:     #f7fafc;
+  --mono:     'Orbitron', monospace;
+  --sans:     'Rajdhani', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+}
+
+/* Grid bg */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header ── */
+header {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(6,12,24,0.95);
+  backdrop-filter: blur(10px);
+}
+
+.logo { display: flex; align-items: center; gap: 16px; }
+
+.logo-hex {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, #00d4ff22, #00d4ff44);
+  border: 1px solid var(--accent);
+  clip-path: polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  animation: hex-pulse 3s ease-in-out infinite;
+}
+
+@keyframes hex-pulse {
+  0%,100% { box-shadow: 0 0 10px rgba(0,212,255,0.3); }
+  50%      { box-shadow: 0 0 25px rgba(0,212,255,0.6); }
+}
+
+.logo-name {
+  font-family: var(--mono);
+  font-size: 16px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.15em;
+}
+.logo-sub {
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  margin-top: 2px;
+}
+
+.header-right { display: flex; align-items: center; gap: 16px; }
+
+.last-updated {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.refresh-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 8px 18px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  background: rgba(0,212,255,0.07);
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: all 0.15s;
+}
+.refresh-btn:hover { background: rgb(95, 169, 235) }
+
+.back-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 8px 18px;
+  border: 1px solid var(--muted);
+  color: var(--muted);
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: all 0.15s;
+}
+.back-btn:hover { border-color: var(--text); color: var(--text); }
+
+/* ── Main layout ── */
+main {
+  position: relative; z-index: 1;
+  padding: 28px 36px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ── Summary strip ── */
+.summary-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.summary-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.summary-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--card-color, var(--accent));
+}
+.summary-card:hover { border-color: var(--card-color, var(--accent)); }
+
+.summary-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.summary-value {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--card-color, #fff);
+  line-height: 1;
+}
+.summary-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── Charts row ── */
+.charts-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.chart-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.chart-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.chart-title::before {
+  content: '';
+  width: 3px; height: 12px;
+  background: var(--accent);
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.chart-wrap {
+  position: relative;
+  height: 220px;
+}
+
+/* ── Attack cards grid ── */
+.section-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.attacks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.attack-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: default;
+}
+.attack-card:hover {
+  border-color: var(--attack-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.attack-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+}
+
+.attack-icon {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  background: var(--attack-color-bg);
+  border: 1px solid var(--attack-color);
+}
+
+.attack-name {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.attack-count-badge {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--attack-color);
+}
+
+.attack-body { padding: 14px 18px; }
+
+.severity-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px;
+}
+
+.severity-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.severity-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.severity-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--attack-color);
+  transition: width 1s ease;
+}
+
+.severity-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--attack-color);
+  color: var(--attack-color);
+  background: var(--attack-color-bg);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.defense-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin: 12px 0 8px;
+}
+
+.defense-list { list-style: none; }
+.defense-list li {
+  font-size: 12px;
+  color: var(--text);
+  padding: 4px 0;
+  display: flex; align-items: flex-start; gap: 8px;
+  line-height: 1.4;
+}
+.defense-list li::before {
+  content: '›';
+  color: var(--attack-color);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── No data state ── */
+.no-data {
+  text-align: center;
+  padding: 60px 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+/* ── Timeline ── */
+.timeline-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 28px;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .charts-row { grid-template-columns: 1fr 1fr; }
+  .summary-strip { grid-template-columns: repeat(3,1fr); }
+}
+@media (max-width: 700px) {
+  .charts-row { grid-template-columns: 1fr; }
+  .summary-strip { grid-template-columns: repeat(2,1fr); }
+  main { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-hex">🛡</div>
+    <div>
+      <div class="logo-name">IDS DASHBOARD</div>
+      <div class="logo-sub">THREAT INTELLIGENCE & ANALYTICS</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="last-updated" id="lastUpdated">LAST UPDATED: —</div>
+    <button class="refresh-btn" onclick="loadData()">↻ REFRESH</button>
+    <a href="http://127.0.0.1:8080/index.html" class="back-btn">← BACK</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- Summary Strip -->
+  <div class="summary-strip" id="summaryStrip">
+    <div class="summary-card" style="--card-color:#00d4ff">
+      <div class="summary-label">Total Analysed</div>
+      <div class="summary-value" id="sumTotal">—</div>
+      <div class="summary-sub">all packets</div>
+    </div>
+    <div class="summary-card" style="--card-color:#ff3060">
+      <div class="summary-label">Total Threats</div>
+      <div class="summary-value" id="sumThreats">—</div>
+      <div class="summary-sub" id="sumThreatPct">—</div>
+    </div>
+    <div class="summary-card" style="--card-color:#00e676">
+      <div class="summary-label">Normal Traffic</div>
+      <div class="summary-value" id="sumNormal">—</div>
+      <div class="summary-sub" id="sumNormalPct">—</div>
+    </div>
+    <div class="summary-card" style="--card-color:#ffaa00">
+      <div class="summary-label">Attack Types</div>
+      <div class="summary-value" id="sumTypes">—</div>
+      <div class="summary-sub">distinct types</div>
+    </div>
+    <div class="summary-card" style="--card-color:#b040ff">
+      <div class="summary-label">Avg Confidence</div>
+      <div class="summary-value" id="sumConf">—</div>
+      <div class="summary-sub">model certainty</div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">THREAT DISTRIBUTION</div>
+      <div class="chart-wrap">
+        <canvas id="pieChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">ATTACK FREQUENCY</div>
+      <div class="chart-wrap">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">DETECTION TIMELINE</div>
+      <div class="chart-wrap">
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attack Cards -->
+  <div class="section-title">ATTACK TYPE ANALYSIS</div>
+  <div class="attacks-grid" id="attacksGrid">
+    <div class="no-data">⚡ No prediction data found — run a live capture session first</div>
+  </div>
+
+</main>
+
+<script>
+const API = 'http://127.0.0.1:5000';
+
+// ── Attack metadata — exact 7 classes from your LSTM model ──
+const ATTACK_META = {
+  'Normal Traffic': {
+    icon: '✓', color: '#00e676', bg: 'rgba(0,230,118,0.08)',
+    severity: 0, severityLabel: 'NONE',
+    defenses: [
+      'Standard firewall rules in place',
+      'Continue regular traffic monitoring',
+      'Maintain baseline traffic profiles',
+      'Schedule periodic security audits'
+    ]
+  },
+  'Bots': {
+    icon: '🤖', color: '#ff3060', bg: 'rgba(255,48,96,0.08)',
+    severity: 85, severityLabel: 'HIGH',
+    defenses: [
+      'Block known bot IP ranges at firewall',
+      'Enable rate limiting on all endpoints',
+      'Use CAPTCHA on login and web forms',
+      'Deploy honeypots to detect bot activity'
+    ]
+  },
+  'Brute Force': {
+    icon: '🔨', color: '#b040ff', bg: 'rgba(176,64,255,0.08)',
+    severity: 78, severityLabel: 'HIGH',
+    defenses: [
+      'Enforce account lockout after 5 failed attempts',
+      'Implement multi-factor authentication (MFA)',
+      'Use CAPTCHA on all login pages',
+      'Monitor and alert on failed login spikes'
+    ]
+  },
+  'DDoS': {
+    icon: '💥', color: '#ff3060', bg: 'rgba(255,48,96,0.08)',
+    severity: 95, severityLabel: 'CRITICAL',
+    defenses: [
+      'Enable DDoS protection (Cloudflare / AWS Shield)',
+      'Rate-limit incoming connections per IP',
+      'Use load balancers to absorb traffic spikes',
+      'Contact ISP for upstream traffic filtering'
+    ]
+  },
+  'DoS': {
+    icon: '⚡', color: '#ff6030', bg: 'rgba(255,96,48,0.08)',
+    severity: 90, severityLabel: 'CRITICAL',
+    defenses: [
+      'Implement connection throttling on server',
+      'Deploy Web Application Firewall (WAF)',
+      'Block repeated offending IPs automatically',
+      'Use CDN to absorb and distribute traffic load'
+    ]
+  },
+  'Port Scanning': {
+    icon: '🔍', color: '#00d4ff', bg: 'rgba(0,212,255,0.08)',
+    severity: 50, severityLabel: 'MEDIUM',
+    defenses: [
+      'Enable port scan detection in firewall',
+      'Close all unused and unnecessary ports',
+      'Use stealth firewall drop rules instead of reject',
+      'Alert on rapid sequential port connection attempts'
+    ]
+  },
+  'Web Attacks': {
+    icon: '🌐', color: '#00aaff', bg: 'rgba(0,170,255,0.08)',
+    severity: 82, severityLabel: 'HIGH',
+    defenses: [
+      'Deploy WAF (Web Application Firewall)',
+      'Sanitize and validate all user inputs server-side',
+      'Use parameterized SQL queries to prevent injection',
+      'Enable Content Security Policy (CSP) headers'
+    ]
+  }
+};
+
+// Fallback for unknown attack types
+function getMeta(label) {
+  if (ATTACK_META[label]) return ATTACK_META[label];
+  // Try partial match
+  for (const key of Object.keys(ATTACK_META)) {
+    if (label.toLowerCase().includes(key.toLowerCase()) ||
+        key.toLowerCase().includes(label.toLowerCase())) {
+      return ATTACK_META[key];
+    }
+  }
+  return {
+    icon: '⚠', color: '#ffaa00', bg: 'rgba(255,170,0,0.08)',
+    severity: 65, severityLabel: 'MEDIUM',
+    defenses: [
+      'Investigate source IP immediately',
+      'Review firewall and access logs',
+      'Apply network segmentation',
+      'Update security policies accordingly'
+    ]
+  };
+}
+
+let pieChartInst = null, barChartInst = null, lineChartInst = null;
+
+const COLORS = [
+  '#00e676','#ff3060','#00d4ff','#ffaa00','#b040ff',
+  '#ff6030','#00ffcc','#ff80aa','#40aaff','#ffdd00'
+];
+
+async function loadData() {
+  try {
+    const res  = await fetch(`${API}/predictions`);
+    const data = await res.json();
+
+    document.getElementById('lastUpdated').textContent =
+      'LAST UPDATED: ' + new Date().toLocaleTimeString();
+
+    if (!data || data.length === 0) {
+      document.getElementById('attacksGrid').innerHTML =
+        '<div class="no-data">⚡ No prediction data found — run a live capture session first then refresh</div>';
+      return;
+    }
+
+    updateSummary(data);
+    updateCharts(data);
+    updateAttackCards(data);
+  } catch(e) {
+    console.error('Failed to load data:', e);
+    document.getElementById('attacksGrid').innerHTML =
+      '<div class="no-data">⚠ Cannot reach server — make sure server.py is running on port 5000</div>';
+  }
+}
+
+function updateSummary(data) {
+  const total   = data.length;
+  const threats = data.filter(d => d.prediction !== 'Normal Traffic');
+  const normal  = total - threats.length;
+  const types   = new Set(threats.map(d => d.prediction)).size;
+  const avgConf = (data.reduce((s,d) => s+d.confidence, 0) / total).toFixed(1);
+
+  document.getElementById('sumTotal').textContent   = total;
+  document.getElementById('sumThreats').textContent = threats.length;
+  document.getElementById('sumNormal').textContent  = normal;
+  document.getElementById('sumTypes').textContent   = types;
+  document.getElementById('sumConf').textContent    = avgConf + '%';
+  document.getElementById('sumThreatPct').textContent =
+    ((threats.length/total)*100).toFixed(1) + '% of traffic';
+  document.getElementById('sumNormalPct').textContent =
+    ((normal/total)*100).toFixed(1) + '% of traffic';
+}
+
+function updateCharts(data) {
+  // Count by prediction
+  const counts = {};
+  data.forEach(d => { counts[d.prediction] = (counts[d.prediction]||0)+1; });
+  const labels = Object.keys(counts);
+  const values = labels.map(l => counts[l]);
+  const colors = labels.map((l,i) => getMeta(l).color);
+
+  // ── Pie chart ──
+  if (pieChartInst) pieChartInst.destroy();
+  pieChartInst = new Chart(document.getElementById('pieChart'), {
+    type: 'doughnut',
+    data: {
+      labels,
+      datasets: [{ data: values, backgroundColor: colors, borderWidth: 2, borderColor: '#060c18' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: '#b0cce0', font: { size: 10, family: 'Rajdhani' }, padding: 10, boxWidth: 10 }
+        }
+      },
+      cutout: '60%'
+    }
+  });
+
+  // ── Bar chart ── (threats only)
+  const threatCounts = {};
+  data.filter(d => d.prediction !== 'Normal Traffic')
+      .forEach(d => { threatCounts[d.prediction] = (threatCounts[d.prediction]||0)+1; });
+  const tLabels = Object.keys(threatCounts);
+  const tValues = tLabels.map(l => threatCounts[l]);
+  const tColors = tLabels.map(l => getMeta(l).color);
+
+  if (barChartInst) barChartInst.destroy();
+  barChartInst = new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+      labels: tLabels.length ? tLabels : ['No Threats'],
+      datasets: [{
+        data: tValues.length ? tValues : [0],
+        backgroundColor: tColors.length ? tColors.map(c => c+'99') : ['#2a4060'],
+        borderColor: tColors.length ? tColors : ['#2a4060'],
+        borderWidth: 1, borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#2a4060', font: { size: 9 } }, grid: { color: '#0a1a3022' } },
+        y: { ticks: { color: '#2a4060', font: { size: 9 } }, grid: { color: '#0a1a3044' }, beginAtZero: true }
+      }
+    }
+  });
+
+  // ── Timeline chart ── group by time
+  const timeline = {};
+  [...data].reverse().forEach(d => {
+    const t = d.time.substring(0,5); // HH:MM
+    if (!timeline[t]) timeline[t] = { normal: 0, threat: 0 };
+    if (d.prediction === 'Normal Traffic') timeline[t].normal++;
+    else timeline[t].threat++;
+  });
+  const tTimes  = Object.keys(timeline).slice(-15); // last 15 time points
+  const tNormal = tTimes.map(t => timeline[t].normal);
+  const tThreat = tTimes.map(t => timeline[t].threat);
+
+  if (lineChartInst) lineChartInst.destroy();
+  lineChartInst = new Chart(document.getElementById('lineChart'), {
+    type: 'line',
+    data: {
+      labels: tTimes,
+      datasets: [
+        {
+          label: 'Normal',
+          data: tNormal,
+          borderColor: '#00e676',
+          backgroundColor: 'rgba(0,230,118,0.08)',
+          fill: true, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#00e676'
+        },
+        {
+          label: 'Threats',
+          data: tThreat,
+          borderColor: '#ff3060',
+          backgroundColor: 'rgba(255,48,96,0.08)',
+          fill: true, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#ff3060'
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          labels: { color: '#b0cce0', font: { size: 10 }, boxWidth: 10 }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#2a4060', font: { size: 9 } }, grid: { color: '#0a1a3022' } },
+        y: { ticks: { color: '#2a4060', font: { size: 9 } }, grid: { color: '#0a1a3044' }, beginAtZero: true }
+      }
+    }
+  });
+}
+
+function updateAttackCards(data) {
+  // Count by type
+  const counts = {};
+  data.forEach(d => { counts[d.prediction] = (counts[d.prediction]||0)+1; });
+
+  // Sort: threats first, then by count
+  const sorted = Object.entries(counts)
+    .sort((a,b) => {
+      const aT = a[0] !== 'Normal Traffic';
+      const bT = b[0] !== 'Normal Traffic';
+      if (aT !== bT) return bT - aT;
+      return b[1] - a[1];
+    });
+
+  const grid = document.getElementById('attacksGrid');
+
+  grid.innerHTML = sorted.map(([label, count]) => {
+    const meta  = getMeta(label);
+    const pct   = ((count / data.length) * 100).toFixed(1);
+    const isNormal = label === 'Normal Traffic';
+
+    return `
+      <div class="attack-card" style="--attack-color:${meta.color};--attack-color-bg:${meta.bg}">
+        <div class="attack-header">
+          <div class="attack-icon">${meta.icon}</div>
+          <div>
+            <div class="attack-name">${label}</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">${pct}% of traffic</div>
+          </div>
+          <div class="attack-count-badge">${count}</div>
+        </div>
+        <div class="attack-body">
+          ${!isNormal ? `
+          <div class="severity-row">
+            <div class="severity-label">SEVERITY</div>
+            <div class="severity-bar">
+              <div class="severity-fill" style="width:${meta.severity}%"></div>
+            </div>
+            <div class="severity-tag">${meta.severityLabel}</div>
+          </div>
+          ` : ''}
+          <div class="defense-title">${isNormal ? 'STATUS' : 'DEFENSE RECOMMENDATIONS'}</div>
+          <ul class="defense-list">
+            ${meta.defenses.map(d => `<li>${d}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Load on page open
+loadData();
+
+// Auto-refresh every 10 seconds
+setInterval(loadData, 10000);
+</script>
+</body>
+</html>
